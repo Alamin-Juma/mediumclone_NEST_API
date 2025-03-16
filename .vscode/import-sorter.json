@@ -1,0 +1,23 @@
+{
+    "importStringConfiguration": {
+      "maximumNumberOfImportExpressionsPerLine": {
+        "count": 80
+      },
+      "quoteMark": "single",
+      "tabSize": 2,
+      "trailingComma": "none"
+    },
+    "sortConfiguration": {
+      "customOrderingRules": {
+        "defaultOrderLevel": 40,
+        "rules": []
+      }
+    },
+    "generalConfiguration": {
+      "sortOnBeforeSave": true
+    },
+    "importPathConfiguration": {
+      "preferRelativePaths": false,
+      "absolutePathPrefixes": ["@app"]
+    }
+  }

@@ -5,21 +5,39 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
+  plugins: ['@typescript-eslint', 'import', 'import-helpers'],
   extends: [
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript'
   ],
-  root: true,
-  env: {
-    node: true,
-    jest: true,
+  settings: {
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+        project: './tsconfig.json',
+      },
+      node: {
+        extensions: ['.ts', '.js', '.json']
+      }
+    },
   },
-  ignorePatterns: ['.eslintrc.js'],
   rules: {
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-require-imports': 'warn',
+    'import/no-relative-parent-imports': 'warn',
+    'import/no-unresolved': 'error',
+    'import-helpers/order-imports': [
+      'warn',
+      {
+        newlinesBetween: 'always',
+        groups: [
+          'module',
+          '/^@app/',
+          ['parent', 'sibling', 'index']
+        ],
+        alphabetize: { order: 'asc', ignoreCase: true }
+      }
+    ]
   },
+  plugins: ['@typescript-eslint', 'import', 'import-helpers'],
 };
