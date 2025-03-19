@@ -1,16 +1,29 @@
 import { Module } from '@nestjs/common';
-import { AppController } from '@app/app.controller';
-import { AppService } from '@app/app.service';
-import { TagModule } from '@app/tag/tag.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import ormconfig from './ormconfig';
 
+import { TypeOrmModule } from '@nestjs/typeorm';
+import ormconfig from '../ormconfig';
+import dataSource from 'ormconfig';
+import { UserModule } from './user/user.module';
+import { TagModule } from './tag/tag.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
+// @Module({
+//   imports: [
+//     TypeOrmModule.forRootAsync({
+//       useFactory: () => dataSource,
+//     }),
+//     TagModule,
+//   ],
+//   controllers: [AppController],
+//   providers: [AppService],
+// })
+// export class AppModule {}
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({
-      useFactory: () => ormconfig,
-    }),
+    TypeOrmModule.forRoot(dataSource.options),
     TagModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
